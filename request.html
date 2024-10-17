@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - JTI X Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #007aff, #00c6ff);
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #007aff;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #007aff;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .button {
+            padding: 12px 30px;
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #005bb5;
+        }
+
+        .images-section {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .images-section img {
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RSVP to JTI X Experience Event</h1>
+        <p>Fill out your details and get ready for an unforgettable experience!</p>
+
+        <form action="https://formspree.io/your-email@example.com" method="POST">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="affiliation">Affiliation</label>
+            <input type="text" id="affiliation" name="affiliation" required>
+
+            <input class="button" type="submit" value="Proceed to Questions">
+        </form>
+
+        <!-- JTI Event Photos -->
+        <div class="images-section">
+            <img src="https://via.placeholder.com/200x200" alt="JTI Event Image 1">
+            <img src="https://via.placeholder.com/200x200" alt="JTI Event Image 2">
+        </div>
+    </div>
+</body>
+</html>
