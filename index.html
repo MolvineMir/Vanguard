@@ -3,45 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
+    <title>Tic Tac Toe - Elegant Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <style>
-        /* Style the Tic Tac Toe board */
-        #board {
-            display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
-            gap: 5px;
-            margin: 20px auto;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .cell {
-            width: 100px;
-            height: 100px;
+        body {
+            font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2em;
-            border: 2px solid #000;
+            height: 100vh;
+            background-color: #f0f0f5;
+            color: #333;
+        }
+        h1 {
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
+            gap: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .cell {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fafafa;
+            font-size: 2.5em;
+            color: #333;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
             cursor: pointer;
+        }
+        .cell:hover {
+            background-color: #e0e0e0;
+        }
+        #restart {
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-size: 16px;
+            border: none;
+            background-color: #007aff;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #restart:hover {
+            background-color: #005bb5;
         }
     </style>
 </head>
 <body>
-    <h1>Tic Tac Toe</h1>
-    <div id="board">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
+    <div id="game-container">
+        <h1>Tic Tac Toe</h1>
+        <div id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button id="restart">Restart Game</button>
     </div>
+
     <script>
         const board = document.getElementById('board');
-        let currentPlayer = 'X';
         const cells = document.querySelectorAll('.cell');
+        const restartBtn = document.getElementById('restart');
+        let currentPlayer = 'X';
+        let gameOver = false;
+
         const winningPatterns = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],
             [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -49,25 +104,36 @@
         ];
 
         function checkWin() {
-            for (const pattern of winningPatterns) {
+            return winningPatterns.some(pattern => {
                 const [a, b, c] = pattern;
-                if (cells[a].innerText && cells[a].innerText === cells[b].innerText && cells[a].innerText === cells[c].innerText) {
-                    return true;
-                }
-            }
-            return false;
+                return cells[a].innerText === currentPlayer &&
+                       cells[a].innerText === cells[b].innerText &&
+                       cells[a].innerText === cells[c].innerText;
+            });
+        }
+
+        function checkDraw() {
+            return [...cells].every(cell => cell.innerText !== '');
         }
 
         function resetGame() {
             cells.forEach(cell => cell.innerText = '');
+            currentPlayer = 'X';
+            gameOver = false;
         }
 
         cells.forEach(cell => {
             cell.addEventListener('click', function () {
-                if (!this.innerText) {
+                if (!this.innerText && !gameOver) {
                     this.innerText = currentPlayer;
                     if (checkWin()) {
-                        alert(currentPlayer + ' wins!');
+                        alert(`${currentPlayer} wins!`);
+                        gameOver = true;
+                        setTimeout(() => {
+                            window.location.href = '/form.html';
+                        }, 1000);
+                    } else if (checkDraw()) {
+                        alert("It's a draw!");
                         setTimeout(() => {
                             window.location.href = '/form.html';
                         }, 1000);
@@ -77,6 +143,8 @@
                 }
             });
         });
+
+        restartBtn.addEventListener('click', resetGame);
     </script>
 </body>
 </html>
