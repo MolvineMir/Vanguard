@@ -3,239 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JTI X Experience Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <title>JTI X Experience Event</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
         }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #007aff, #00c6ff);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        .parallax {
-            background: url('https://source.unsplash.com/1600x900/?event,celebration') no-repeat center center fixed;
-            background-size: cover;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .parallax h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .parallax p {
-            font-size: 1.5em;
-            color: #f0f0f5;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .proceed-btn {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            font-size: 1.2em;
-        }
-
-        .proceed-btn:hover {
-            background-color: #ff4d4d;
-            transform: scale(1.05);
-        }
-
-        .confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
+        header {
             background-color: white;
-            opacity: 0.7;
-            animation: fall 5s infinite ease-in;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            padding: 1rem;
         }
-
-        @keyframes fall {
-            from { transform: translateY(0); }
-            to { transform: translateY(100vh); }
-        }
-
-        .form-container {
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #333;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h2 {
-            margin-top: 50px;
-            color: #007aff;
-        }
-
-        label {
-            display: block;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            text-align: left;
-        }
-
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #007aff;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus, input[type="email"]:focus {
-            border-color: #005bb5;
-        }
-
-        .submit-btn {
-            padding: 12px 30px;
-            background-color: #007aff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #005bb5;
-            transform: scale(1.05);
-        }
-
-        .images-section {
-            margin-top: 30px;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
         }
-
-        .images-section img {
-            width: 200px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
         }
-
-        .images-section img:hover {
-            transform: scale(1.1);
+        nav ul li {
+            margin-left: 1rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #4b5563;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #4338ca;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.375rem;
+        }
+        footer {
+            background-color: white;
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
-
-    <!-- Confetti Animation -->
-    <div class="confetti-container" id="confetti-container"></div>
-
-    <!-- Congratulations Section (Parallax Effect) -->
-    <div class="parallax">
-        <h1 id="title">Congratulations!</h1>
-        <p id="message">You're invited to the <strong>JTI X Experience Event!</strong></p>
-    </div>
-
-    <!-- Form Section -->
-    <div id="form-section" class="form-container">
-        <h2>RSVP to JTI X Experience Event</h2>
-        <p>Fill out your details and get ready for an unforgettable experience!</p>
-        <form action="https://formspree.io/your-email@example.com" method="POST">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="affiliation">Affiliation</label>
-            <input type="text" id="affiliation" name="affiliation" required>
-
-            <input class="submit-btn" type="submit" value="Proceed to RSVP">
-        </form>
-
-        <!-- Dynamic Images (Generated from Unsplash) -->
-        <div class="images-section">
-            <img src="https://source.unsplash.com/200x200/?celebration,event" alt="JTI Event Image 1">
-            <img src="https://source.unsplash.com/200x200/?party,people" alt="JTI Event Image 2">
+    <header>
+        <div class="header-content">
+            <img src="placeholder-logo.png" alt="JTI Logo" height="50">
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#register">Register</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <script>
-        // Confetti Animation Logic
-        const confettiContainer = document.getElementById('confetti-container');
-        function createConfettiPiece() {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti-piece');
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            confettiContainer.appendChild(confetti);
+    <main>
+        <section class="hero">
+            <h1>JTI X YOU event</h1>
+            <p>Made for you to Xperience, Xplore, Xpand</p>
+            <a href="jti-x-experience-form.html" class="btn">Ready to find your career match?</a>
+        </section>
 
-            setTimeout(() => {
-                confetti.remove();
-            }, 5000);
-        }
+        <section id="about">
+            <div class="card">
+                <div class="grid">
+                    <div>
+                        <h2>About the Event</h2>
+                        <p>The JTI X YOU event is an immersive experience designed to help you discover your potential and explore exciting career opportunities. This unique event brings together industry experts, innovative thinkers, and ambitious individuals like yourself to create a dynamic environment for growth and networking. Through interactive workshops, inspiring keynotes, and personalized mentoring sessions, you'll gain valuable insights into the ever-evolving business landscape and find your perfect career match. Whether you're looking to expand your skillset, explore new industries, or find your professional X factor, JTI X YOU is your gateway to a world of possibilities.</p>
+                    </div>
+                    <div class="image-grid">
+                        <img src="placeholder-event-1.jpg" alt="JTI Event Image 1">
+                        <img src="placeholder-event-2.jpg" alt="JTI Event Image 2">
+                        <img src="placeholder-event-3.jpg" alt="JTI Event Image 3">
+                        <img src="placeholder-event-4.jpg" alt="JTI Event Image 4">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        // Create multiple confetti pieces
-        for (let i = 0; i < 150; i++) {
-            setTimeout(createConfettiPiece, i * 100);
-        }
+        <section id="register" class="hero">
+            <h2>Ready to find your X factor?</h2>
+            <a href="jti-x-experience-form.html" class="btn">Register Now</a>
+        </section>
+    </main>
 
-        // Automatically scroll to the form section after 5 seconds
-        setTimeout(() => {
-            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
-        }, 5000);
-
-        // Dynamic Title and Message based on win/lose
-        const won = true; // You can adjust this based on game outcome
-        const title = document.getElementById('title');
-        const message = document.getElementById('message');
-        if (!won) {
-            title.textContent = "Oh no!";
-            message.innerHTML = "You didn’t win this time, but you’re still invited to the <strong>JTI X Experience Event!</strong>";
-        }
-    </script>
+    <footer>
+        <p>&copy; 2023 JTI. All rights reserved.</p>
+    </footer>
 </body>
 </html>
