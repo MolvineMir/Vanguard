@@ -12,31 +12,55 @@
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
+
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(to right, #007aff, #00c6ff);
             color: white;
             overflow-x: hidden;
         }
-        h1, h2 {
-            font-weight: 500;
-            color: white;
-            text-align: center;
-            margin-top: 100px;
-        }
-        p {
-            font-size: 1.5em;
-            text-align: center;
-            margin: 20px auto;
-            color: #f0f0f5;
-        }
-        .container {
+
+        .parallax {
+            background: url('https://source.unsplash.com/1600x900/?event,celebration') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            position: relative;
         }
+
+        .parallax h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .parallax p {
+            font-size: 1.5em;
+            color: #f0f0f5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .proceed-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .proceed-btn:hover {
+            background-color: #ff4d4d;
+            transform: scale(1.05);
+        }
+
         .confetti-container {
             position: fixed;
             top: 0;
@@ -46,6 +70,7 @@
             pointer-events: none;
             z-index: 9999;
         }
+
         .confetti-piece {
             position: absolute;
             width: 10px;
@@ -54,24 +79,12 @@
             opacity: 0.7;
             animation: fall 5s infinite ease-in;
         }
+
         @keyframes fall {
-            from {transform: translateY(0);}
-            to {transform: translateY(100vh);}
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
         }
-        .proceed-btn {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1.2em;
-        }
-        .proceed-btn:hover {
-            background-color: #ff4d4d;
-        }
+
         .form-container {
             max-width: 700px;
             margin: 50px auto;
@@ -81,17 +94,32 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
             color: #333;
+            animation: fadeInUp 1s ease-in-out;
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         h2 {
             margin-top: 50px;
             color: #007aff;
         }
+
         label {
             display: block;
             font-size: 1.1em;
             margin-bottom: 5px;
             text-align: left;
         }
+
         input[type="text"], input[type="email"] {
             width: 100%;
             padding: 12px;
@@ -99,7 +127,13 @@
             border: 2px solid #007aff;
             border-radius: 8px;
             font-size: 1em;
+            transition: border-color 0.3s ease;
         }
+
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #005bb5;
+        }
+
         .submit-btn {
             padding: 12px 30px;
             background-color: #007aff;
@@ -108,20 +142,29 @@
             border-radius: 8px;
             font-size: 1.2em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
+
         .submit-btn:hover {
             background-color: #005bb5;
+            transform: scale(1.05);
         }
+
         .images-section {
             margin-top: 30px;
             display: flex;
             justify-content: space-around;
         }
+
         .images-section img {
             width: 200px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .images-section img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -130,8 +173,8 @@
     <!-- Confetti Animation -->
     <div class="confetti-container" id="confetti-container"></div>
 
-    <!-- Congratulations Section -->
-    <div class="container">
+    <!-- Congratulations Section (Parallax Effect) -->
+    <div class="parallax">
         <h1 id="title">Congratulations!</h1>
         <p id="message">You're invited to the <strong>JTI X Experience Event!</strong></p>
     </div>
@@ -153,10 +196,10 @@
             <input class="submit-btn" type="submit" value="Proceed to RSVP">
         </form>
 
-        <!-- Event Images -->
+        <!-- Dynamic Images (Generated from Unsplash) -->
         <div class="images-section">
-            <img src="https://via.placeholder.com/200x200" alt="JTI Event Image 1">
-            <img src="https://via.placeholder.com/200x200" alt="JTI Event Image 2">
+            <img src="https://source.unsplash.com/200x200/?celebration,event" alt="JTI Event Image 1">
+            <img src="https://source.unsplash.com/200x200/?party,people" alt="JTI Event Image 2">
         </div>
     </div>
 
