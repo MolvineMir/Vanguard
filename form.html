@@ -3,229 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JTI X Experience Event</title>
+    <title>Congratulations!</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
-
         body {
             font-family: 'Roboto', sans-serif;
-            color: #333;
-            background-color: #f0f0f5;
-            overflow-x: hidden;
-        }
-
-        h1, h2 {
-            font-weight: 500;
-            color: #007aff;
-            text-align: center;
-            margin: 50px 0;
-        }
-
-        p {
-            font-size: 1.2em;
-            text-align: center;
-            color: #333;
-        }
-
-        #confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .section {
-            padding: 100px 20px;
-            text-align: center;
-            transition: background-color 0.5s ease;
-        }
-
-        .section.bg-vibrant {
-            background: linear-gradient(to right, #ff4d4d, #ffb74d);
-            color: white;
-        }
-
-        .section.bg-blue {
             background: linear-gradient(to right, #007aff, #00c6ff);
             color: white;
+            overflow-x: hidden;
         }
-
-        form {
-            margin: 50px auto;
-            max-width: 500px;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        label {
-            display: block;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 2px solid #007aff;
-            border-radius: 8px;
-            font-size: 1em;
-        }
-
-        input[type="submit"], .button {
-            padding: 15px 30px;
-            background-color: #007aff;
+        h1, h2 {
+            font-weight: 500;
             color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        input[type="submit"]:hover, .button:hover {
-            background-color: #005bb5;
-        }
-
-        .questions {
-            margin-top: 50px;
             text-align: center;
-            color: #333;
+            margin-top: 100px;
         }
-
-        .long-page {
-            background-color: white;
-            transition: background-color 1s ease;
+        p {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 20px auto;
+            color: #f0f0f5;
         }
-
-        .smooth-scroll {
-            scroll-behavior: smooth;
-        }
-
-        .jti-images {
-            width: 100%;
-            margin: 50px auto;
+        .container {
             display: flex;
-            justify-content: space-around;
-            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-
-        .jti-images img {
-            width: 250px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            animation: confetti-fall 5s infinite;
+            opacity: 0.7;
         }
-
+        @keyframes confetti-fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
         .proceed-btn {
             margin-top: 30px;
-            font-size: 1.2em;
-            padding: 10px 25px;
+            padding: 15px 30px;
             background-color: #ff6f61;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-size: 1.2em;
         }
-
         .proceed-btn:hover {
             background-color: #ff4d4d;
         }
-
-        /* Confetti animation */
-        .confetti {
+        .celebration {
+            display: none;
+        }
+        /* Confetti Animation - Randomized */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .confetti-piece {
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #ffcc00;
-            animation: confetti-fall 5s infinite;
+            background-color: white;
             opacity: 0.7;
+            animation: fall 5s infinite ease-in;
         }
-
-        @keyframes confetti-fall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
+        @keyframes fall {
+            from {transform: translateY(0);}
+            to {transform: translateY(100vh);}
         }
     </style>
 </head>
 <body>
+    <div class="confetti-container" id="confetti-container"></div>
 
-    <!-- Confetti -->
-    <div id="confetti"></div>
-
-    <!-- Winner or Non-Winner Section -->
-    <div class="section bg-vibrant">
-        <h1>Congratulations!</h1>
-        <p>You're invited to the JTI X Experience Event!</p>
-        <button class="proceed-btn" onclick="smoothScrollToQuestions()">Proceed</button>
-    </div>
-
-    <!-- Personal Information Section -->
-    <div class="section long-page bg-blue">
-        <h2>Tell Us About You</h2>
-        <form action="https://formspree.io/your-email@example.com" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="affiliation">Affiliation:</label>
-            <input type="text" id="affiliation" name="affiliation">
-
-            <input type="submit" value="Submit">
-        </form>
-
-        <!-- JTI Experience Images -->
-        <div class="jti-images">
-            <img src="https://via.placeholder.com/250x250" alt="JTI Event Image 1">
-            <img src="https://via.placeholder.com/250x250" alt="JTI Event Image 2">
-            <img src="https://via.placeholder.com/250x250" alt="JTI Event Image 3">
-        </div>
-    </div>
-
-    <!-- Additional Questions Section -->
-    <div class="section questions bg-vibrant">
-        <h2>More About You</h2>
-        <p>What's your favorite experience so far?</p>
-        <p>What would you like to see at the event?</p>
-        <button class="proceed-btn">Submit Feedback</button>
+    <div class="container">
+        <h1 id="title">Congratulations!</h1>
+        <p id="message">You're invited to the <strong>JTI X Experience Event!</strong></p>
+        <button class="proceed-btn" onclick="window.location.href='form.html'">Proceed to RSVP</button>
     </div>
 
     <script>
-        // Confetti Animation
-        function createConfetti() {
-            const confettiElement = document.createElement('div');
-            confettiElement.classList.add('confetti');
-            confettiElement.style.left = `${Math.random() * 100}vw`;
-            confettiElement.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            document.body.appendChild(confettiElement);
+        const confettiContainer = document.getElementById('confetti-container');
+
+        function createConfettiPiece() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti-piece');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            confettiContainer.appendChild(confetti);
 
             setTimeout(() => {
-                confettiElement.remove();
+                confetti.remove();
             }, 5000);
         }
 
-        for (let i = 0; i < 100; i++) {
-            setTimeout(createConfetti, i * 100);
+        for (let i = 0; i < 150; i++) {
+            setTimeout(createConfettiPiece, i * 100);
         }
 
-        // Smooth Scroll to Next Section
-        function smoothScrollToQuestions() {
-            document.querySelector('.long-page').scrollIntoView({ behavior: 'smooth' });
+        // Show dynamic title and message based on win/lose status
+        // Example: You can adjust this logic to pass a win/lose flag dynamically
+        const won = true; // Set to false if the player lost
+
+        const title = document.getElementById('title');
+        const message = document.getElementById('message');
+        if (!won) {
+            title.textContent = "Oh no!";
+            message.innerHTML = "You didn’t win this time, but you’re still invited to the <strong>JTI X Experience Event!</strong>";
         }
     </script>
 </body>
