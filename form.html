@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Congratulations!</title>
+    <title>JTI X Experience Invitation</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -36,17 +37,26 @@
             justify-content: center;
             height: 100vh;
         }
-        .confetti {
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .confetti-piece {
             position: absolute;
             width: 10px;
             height: 10px;
             background-color: white;
-            animation: confetti-fall 5s infinite;
             opacity: 0.7;
+            animation: fall 5s infinite ease-in;
         }
-        @keyframes confetti-fall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
+        @keyframes fall {
+            from {transform: translateY(0);}
+            to {transform: translateY(100vh);}
         }
         .proceed-btn {
             margin-top: 30px;
@@ -62,44 +72,97 @@
         .proceed-btn:hover {
             background-color: #ff4d4d;
         }
-        .celebration {
-            display: none;
+        .form-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #333;
         }
-        /* Confetti Animation - Randomized */
-        .confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
+        h2 {
+            margin-top: 50px;
+            color: #007aff;
+        }
+        label {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input[type="text"], input[type="email"] {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #007aff;
+            border-radius: 8px;
+            font-size: 1em;
         }
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            opacity: 0.7;
-            animation: fall 5s infinite ease-in;
+        .submit-btn {
+            padding: 12px 30px;
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        @keyframes fall {
-            from {transform: translateY(0);}
-            to {transform: translateY(100vh);}
+        .submit-btn:hover {
+            background-color: #005bb5;
+        }
+        .images-section {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .images-section img {
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
+
+    <!-- Confetti Animation -->
     <div class="confetti-container" id="confetti-container"></div>
 
+    <!-- Congratulations Section -->
     <div class="container">
         <h1 id="title">Congratulations!</h1>
         <p id="message">You're invited to the <strong>JTI X Experience Event!</strong></p>
-        <button class="proceed-btn" onclick="window.location.href='form.html'">Proceed to RSVP</button>
+    </div>
+
+    <!-- Form Section -->
+    <div id="form-section" class="form-container">
+        <h2>RSVP to JTI X Experience Event</h2>
+        <p>Fill out your details and get ready for an unforgettable experience!</p>
+        <form action="https://formspree.io/your-email@example.com" method="POST">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="affiliation">Affiliation</label>
+            <input type="text" id="affiliation" name="affiliation" required>
+
+            <input class="submit-btn" type="submit" value="Proceed to RSVP">
+        </form>
+
+        <!-- Event Images -->
+        <div class="images-section">
+            <img src="https://via.placeholder.com/200x200" alt="JTI Event Image 1">
+            <img src="https://via.placeholder.com/200x200" alt="JTI Event Image 2">
+        </div>
     </div>
 
     <script>
+        // Confetti Animation Logic
         const confettiContainer = document.getElementById('confetti-container');
-
         function createConfettiPiece() {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti-piece');
@@ -112,14 +175,18 @@
             }, 5000);
         }
 
+        // Create multiple confetti pieces
         for (let i = 0; i < 150; i++) {
             setTimeout(createConfettiPiece, i * 100);
         }
 
-        // Show dynamic title and message based on win/lose status
-        // Example: You can adjust this logic to pass a win/lose flag dynamically
-        const won = true; // Set to false if the player lost
+        // Automatically scroll to the form section after 5 seconds
+        setTimeout(() => {
+            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+        }, 5000);
 
+        // Dynamic Title and Message based on win/lose
+        const won = true; // You can adjust this based on game outcome
         const title = document.getElementById('title');
         const message = document.getElementById('message');
         if (!won) {
